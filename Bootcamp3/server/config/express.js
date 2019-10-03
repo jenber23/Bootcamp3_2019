@@ -1,3 +1,4 @@
+//edited
 var path = require('path'),  
     express = require('express'),  //refers to Express the middleware helper for Node.js 
     mongoose = require('mongoose'),
@@ -8,7 +9,7 @@ var path = require('path'),
     getCoordinates = require('../controllers/coordinates.server.controller.js');
 
 module.exports.init = function() {
-  //connect to database
+  //connect to database using config file
   mongoose.connect(config.db.uri, { useNewUrlParser: true });
     mongoose.set('useCreateIndex', true);
     mongoose.set('useFindAndModify', false);
@@ -40,7 +41,8 @@ module.exports.init = function() {
 
 
   /* Request Handler for all other routes
-     Sends a response (res) to go to the homepage for all routes not specified */ 
+     Sends a response (res) to go to the homepage for all routes not specified
+     not specified: anything that isn't either/coordinates or /lisitings */ 
   app.all('/*', function(req, res) {
    
    /* js.com/en/api.html#res.sendFile
@@ -50,8 +52,8 @@ module.exports.init = function() {
       If no path segments are passed, path.resolve() will return 
       the absolute path of the current working directory.   */
   
-    //client file contains the appropriate string to output
-    //for when route is not listing or coordinates
+    //client file contains the appropriate string to output 
+    //serves as the "else" statement
     res.sendFile(path.resolve('client/index.html'));
   });
   

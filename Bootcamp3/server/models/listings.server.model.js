@@ -4,8 +4,6 @@
 var mongoose = require('mongoose') ,
 Schema = mongoose.Schema;
 
-
-
 /* Create your schema for the data in the listings.json file that will define how data is saved in your database
      See https://mongoosejs.com/docs/guide.html for examples for creating schemas
      See also https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
@@ -22,7 +20,6 @@ var listingSchema = new Schema({
     longitude: Number
   },
   address: String,
-  
   created_at: Date,
   updated_at: Date
 
@@ -37,8 +34,6 @@ listingSchema.pre('save', function(next) {
   this.updated_at = date;
   if(!this.created_at) // just created, no date added yet
     this.created_at = date;
-  
-    
   next();
 });
 
